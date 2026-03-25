@@ -1,41 +1,44 @@
 # ML-Based SOC: Web Attack Detection System
 
-Overview
+## Overview
+
 This project is a Machine Learning-based Security Operations Center (SOC) system designed to detect web attacks such as SQL Injection (SQLi) and Cross-Site Scripting (XSS), including obfuscated inputs.
 
 ---
+
 ## Highlights
-- Achieved ~99% accuracy in attack detection  
-- Detects obfuscated XSS using character-level n-grams  
-- Real-time logging with IP and geolocation  
-- Visualization of global attack patterns  
+
+* Achieved ~99% accuracy in attack detection
+* Detects obfuscated XSS using character-level n-grams
+* Real-time logging with IP and geolocation
+* Visualization of global attack patterns
 
 ---
 
 ## Approach
 
-### 1. Preprocessing
-- Basic filtering for normal inputs
-- Removal of HTML tags to handle obfuscated payloads
+### Preprocessing
 
-### 2. Feature Extraction
-- Word-level n-grams → detect SQL injection patterns  
-- Character-level n-grams → detect obfuscated XSS attacks  
-- TF-IDF vectorization to convert text into numerical features  
+* Basic filtering for normal inputs
+* Removal of HTML tags to handle obfuscated payloads
 
-### 3. Model
-- Multinomial Logistic Regression classifier  
-- Classes:
-  - Normal  
-  - SQL Injection  
-  - XSS  
+### Feature Extraction
+
+* Word-level n-grams → detect SQL injection patterns
+* Character-level n-grams → detect obfuscated XSS attacks
+* TF-IDF vectorization
+
+### Model
+
+* Multinomial Logistic Regression
+* Classes: Normal, SQL Injection, XSS
 
 ---
 
 ## Results
 
-- Accuracy: **~99%**
-- High precision, recall, and F1-score across all classes  
+* Accuracy: **~99%**
+* High precision, recall, and F1-score
 
 ---
 
@@ -53,38 +56,88 @@ Confusion Matrix
 
 ## Features
 
-- Detects SQL Injection and XSS attacks  
-- Handles obfuscated attack payloads  
-- Logs attacker details:
-  - IP address  
-  - Geolocation  
-  - Timestamp  
-  - Proxy/VPN detection  
-- Real-time visualization of global attack patterns  
+* Detects SQL Injection and XSS attacks
+* Handles obfuscated payloads
+* Logs attacker details:
+
+  * IP address
+  * Geolocation
+  * Timestamp
+  * Proxy/VPN detection
+* Real-time attack visualization
 
 ---
 
 ## Tech Stack
-- Python  
-- Scikit-learn  
-- Flask  
-- TF-IDF Vectorizer  
-- N-grams  
+
+* Python
+* Flask
+* Scikit-learn
+* TF-IDF Vectorizer
+* N-grams
+
+---
+
+## How to Run
+
+```bash
+git clone https://github.com/RevanthSai24/ml-soc-attack-detection.git
+cd ml-soc-attack-detection
+pip install -r requirements.txt
+python init_db.py
+python app.py
+```
+
+### Access
+
+* API: http://127.0.0.1:5000/predict
+* Map: http://127.0.0.1:5000/attack-map
+
+---
+
+## Public Access (ngrok)
+
+By default, the app runs on localhost, so geolocation may not work.
+
+To enable real-world testing:
+
+```bash
+ngrok http 5000
+```
+
+This allows:
+
+* External access
+* Real IP detection
+* Accurate map visualization
+
+---
+
+## Testing
+
+```powershell
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/predict" `
+-Method POST `
+-Body '{"username":"admin'' OR 1=1--","password":"test"}' `
+-ContentType "application/json"
+```
 
 ---
 
 ## Dataset
-- Custom dataset of normal, SQL injection, and XSS payloads  
-- Includes obfuscated attack samples for robust detection  
+
+Custom dataset including normal, SQLi, and XSS payloads with obfuscation.
 
 ---
 
 ## Future Improvements
-- Deep learning models (LSTM/Transformers)  
-- Adversarial attack resistance  
-- Integration with real-world traffic logs  
+
+* Deep learning models (LSTM/Transformers)
+* Adversarial attack resistance
+* Real traffic integration
 
 ---
 
 ## Author
+
 **Chadive Revanth Sai Reddy**
