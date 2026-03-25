@@ -14,7 +14,11 @@ CREATE TABLE IF NOT EXISTS attacks (
     country TEXT,
     city TEXT,
     latitude REAL,
-    longitude REAL
+    longitude REAL,
+    organization TEXT,
+    vpn INTEGER,
+    proxy INTEGER,
+    hosting INTEGER
 )
 """)
 
